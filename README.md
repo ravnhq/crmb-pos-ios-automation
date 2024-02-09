@@ -1,5 +1,5 @@
-# CRMB IOS Automation
-CRMB iOS Automation is a repository to hold all Automation Test Script for Whitelabel QA as a Regression Suite
+# CRMB POS IOS Automation
+CRMB POS iOS Automation is a repository to hold all Automation Test Script for POS as a Regression Suite
 
 #### Before Starting
 The WebDriverIO version being used is V8 which uses `ESNext` for Typescript `tsconfig.json` in the `module` compilerOptions, hence, it requires the LTS version of [**Node.js**](https://nodejs.org/es/download/) 
