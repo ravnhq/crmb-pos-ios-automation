@@ -1,0 +1,35 @@
+{
+    "timers": {
+        "minimum1": 500,
+        "minimum2": 1000,
+        "short1": 1500,
+        "short2": 2000,
+        "short3": 2500,
+        "medium": 3000,
+        "medium2": 4000,
+        "medium3": 4500,
+        "large1": 5000,
+        "large2": 6000,
+        "large3": 7000,
+        "extraLarge": 10000,
+        "extraLarge2": 15000,
+        "waitUntilTimer": 25000
+    },
+    "errorMessages": {
+        "waitUntilErrorMessage": "We could not locate the element within the DOM, it is not visible or it was removed",
+        "chaiErrorMessage": "Could not locate the element, assertion failed"
+    },
+    "testScriptConstants":{
+        "employeePhoneNumber":"5037759361",
+        "employeeCode": "495427",
+        "customerPhoneNumber":"2027336837",
+        "customerCode":"000000",
+        "userFirstName":"Automation",
+        "userLastName": "User",
+        "searchItem": "Bud Light",
+        "testCardNumber":"4242424242424242",
+        "testExpirationDate":"1225",
+        "testCVC":"034",
+        "testZip":"01101"
+    }
+}
