@@ -15,7 +15,7 @@ export const config = Object.assign(baseConfig, {
             'appium:platformVersion': '17.0',
             'appium:deviceName': 'iPad Air (5th generation)',
             'appium:automationName': 'XCUITest',
-            'appium:app': path.join(process.cwd(), '/app/pos.app'),
+            'appium:app': path.join(process.cwd(), '/app/crmbPos.app'),
         }
     ],
 

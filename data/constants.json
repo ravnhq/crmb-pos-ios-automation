@@ -30,6 +30,7 @@
         "testCardNumber":"4242424242424242",
         "testExpirationDate":"1225",
         "testCVC":"034",
-        "testZip":"01101"
+        "testZip":"01101",
+        "deviceCode": "1231231231"
     }
 }
