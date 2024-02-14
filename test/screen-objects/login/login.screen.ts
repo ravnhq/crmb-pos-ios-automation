@@ -14,7 +14,7 @@ class LoginScreen extends Screen {
     async typeIntoDeviceCodeInput(testid: string, deviceCode: string): Promise<void> {
         const reportingMessage = `${deviceCode} set as Device Code`;
         await executeWebAction(this.typeOnMobileElement, testid, reportingMessage, await this.login_device_code_input, deviceCode);
-        await this.explicitPause(constants.timers.short1);
+        await this.explicitPause(constants.timers.short3);
     }
 
     async tapOnVerifyToLogInButton(testid: string): Promise<void> {
@@ -22,6 +22,8 @@ class LoginScreen extends Screen {
         await executeWebAction(this.tapOnMobileElement, testid, reportingMessage, await this.login_verify_login_button);
         await this.explicitPause(constants.timers.short2);
     }
+
+    
 }
 
 export default new LoginScreen();
