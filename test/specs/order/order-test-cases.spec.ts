@@ -18,6 +18,45 @@ describe('CRMB-POS - Order Test Scenarios', () => {
         await nativeScreen.isAllowWhileAppButtonPresent(testid);
     })
 
+    it('POS-002 Create Order / Pick Up / CC payment', async () => {
+        await nativeScreen.isAllowWhileAppButtonPresent(testid);
+        await homeScreen.tapOnToGoText(testid);
+        await homeScreen.tapOnSearchBarButton(testid);
+        await homeScreen.typeOnSearchBarInput(testid, constants.testScriptConstants.searchItem);
+        await homeScreen.tapOnItemFirstResult(testid);
+        await menuItemDetailsScreen.tapOnAddToOrder(testid);
+        await homeScreen.tapOnCheckoutButton(testid);
+        await checkoutScreen.tapOnChargeCustomerButton(testid);
+        await checkoutScreen.tapOnContinueButton(testid);
+        await checkoutScreen.tapOnGoToPaymentButton(testid);
+        await checkoutScreen.typeOnCardNumberInput(testid, constants.testScriptConstants.testCardNumber);
+        await checkoutScreen.typeOnExpirationDateInput(testid, constants.testScriptConstants.testExpirationDate);
+        await checkoutScreen.typeOnCVCInput(testid, constants.testScriptConstants.testCVC);
+        await checkoutScreen.typeOnZIPInput(testid, constants.testScriptConstants.testZip);
+        await checkoutScreen.tapOnPayButton(testid);
+        await checkoutScreen.tapOnDoneButton(testid);
+    });
+
+    it('POS-003 Create Order / Pick Up / Cash payment', async () => {
+        await nativeScreen.isAllowWhileAppButtonPresent(testid);
+        await homeScreen.tapOnToGoText(testid);
+        await homeScreen.tapOnSearchBarButton(testid);
+        await homeScreen.typeOnSearchBarInput(testid, constants.testScriptConstants.searchItem);
+        await homeScreen.tapOnItemFirstResult(testid);
+        await menuItemDetailsScreen.tapOnAddToOrder(testid);
+        await homeScreen.tapOnCheckoutButton(testid);
+        await checkoutScreen.tapOnChargeCustomerButton(testid);
+        await checkoutScreen.tapOnContinueButton(testid);
+        await checkoutScreen.tapOnPayWithCashButton(testid);
+        await checkoutScreen.tapOnCalculateChangeButton(testid);
+        await checkoutScreen.typeInCodeNumber(testid, constants.testScriptConstants.employeeCode);
+        await checkoutScreen.tapOnContinueButton(testid);
+        await checkoutScreen.typeInCodeNumber(testid, constants.testScriptConstants.orderTotal);
+        await checkoutScreen.tapOnCompleteTransactionButton(testid);
+        await checkoutScreen.isOrderPlacedMessagePresent(testid);
+        await checkoutScreen.tapOnDoneButton(testid);
+    });
+
     it('POS-010- Create Order / Curbside / CC payment', async () => {
         await homeScreen.tapOnCurbsideButton(testid);
         await homeScreen.tapOnSearchBarButton(testid);
