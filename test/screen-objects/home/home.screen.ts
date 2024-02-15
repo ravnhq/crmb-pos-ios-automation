@@ -1,0 +1,51 @@
+import executeWebAction from "../../helper/error-handling.js";
+import generateMobileLocator from "../../helper/mobile-locator-generator.js";
+import { ACCESSIBILITY_ID, CLASS_CHAIN, PREDICATE_STRING } from "../../helper/selector-types.js";
+import Screen from "../Screen.js";
+import constants from '../../../data/constants.json' assert {type: "json"};
+import { assert } from 'chai';
+import reporter from '../../helper/reporter.js';
+
+class HomeScreen extends Screen {
+    constructor() {
+        super();
+    }
+
+    get home_screen_curbside_button() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, 'Curbside')}`) }
+    get home_screen_search_button() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, 'Search')}`)}
+    get home_screen_menu_item_first_result() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, 'Bud Light')}`)}
+    get home_screen_checkout_button() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, 'Check out')}`) }
+
+    async tapOnCurbsideButton(testid: string): Promise<void> {
+        const reportingMessage = "Tap on Curbside Button";
+        await executeWebAction(this.tapOnMobileElement, testid, reportingMessage, await this.home_screen_curbside_button);
+        await this.explicitPause(constants.timers.short1);
+    }
+
+    async tapOnSearchBarButton(testid: string): Promise<void> {
+        const reportingMessage = "Tap on Search bar mobile element";
+        await executeWebAction(this.tapOnMobileElement, testid, reportingMessage, await this.home_screen_search_button);
+    }
+
+    async typeOnSearchBarInput(testid: string, itemName: string): Promise<void> {
+        const reportingMessage = `${itemName} set as search value`
+        await executeWebAction(this.typeOnMobileElement, testid, reportingMessage, await this.home_screen_search_button, itemName);
+        await this.explicitPause(constants.timers.short1);
+    }
+
+    async tapOnItemFirstResult(testid: string): Promise<void> {
+        const reportingMessage = "Tap on Item first result";
+        await executeWebAction(this.tapOnMobileElement, testid, reportingMessage, await this.home_screen_menu_item_first_result);
+        await this.explicitPause(constants.timers.minimum1);
+    }
+
+    async tapOnCheckoutButton(testid: string): Promise<void> {
+        const reportingMessage = "Tap on Check out Button";
+        await executeWebAction(this.tapOnMobileElement, testid, reportingMessage, await this.home_screen_checkout_button);
+        await this.explicitPause(constants.timers.short2);
+    }
+
+
+}
+
+export default new HomeScreen();
