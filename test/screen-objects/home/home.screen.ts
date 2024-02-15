@@ -14,7 +14,8 @@ class HomeScreen extends Screen {
     get home_screen_curbside_button() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, 'Curbside')}`) }
     get home_screen_search_button() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, 'Search')}`)}
     get home_screen_menu_item_first_result() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, 'Bud Light')}`)}
-    get home_screen_checkout_button() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, 'Check out')}`) }
+    get home_screen_checkout_button() { return $(`${generateMobileLocator(CLASS_CHAIN, '**/XCUIElementTypeButton[`name == "Checkout"`][2]')}`) }
+    get home_screen_take_out_button() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, 'ToGo')}`) }
 
     async tapOnCurbsideButton(testid: string): Promise<void> {
         const reportingMessage = "Tap on Curbside Button";
@@ -45,7 +46,11 @@ class HomeScreen extends Screen {
         await this.explicitPause(constants.timers.short2);
     }
 
-
+    async tapOnToGoText(testid: string): Promise<void> {
+        const reportingMessage = "Tap on To Go Text";
+        await executeWebAction(this.tapOnMobileElement, testid, reportingMessage, await this.home_screen_take_out_button);
+        await this.explicitPause(constants.timers.short1);
+    }
 }
 
 export default new HomeScreen();

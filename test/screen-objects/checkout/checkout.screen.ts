@@ -21,6 +21,10 @@ class CheckoutScreen extends Screen {
     get checkout_screen_zip_input() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, 'ZIP')}`) }
     get checkout_screen_pay_button() { return $('-ios class chain:**/XCUIElementTypeButton[`label BEGINSWITH "Pay $"`]') }
     get checkout_done_button() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, 'Done')}`) }
+    get checkout_pay_with_cash_button() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, 'Pay with cash')}`) }
+    get checkout_calculate_change_button() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, "Calculate change due")}`) }
+    get checkout_screen_complete_transaction_button() {return $(`${generateMobileLocator(ACCESSIBILITY_ID, "Complete transaction")}`)}
+    get checkout_order_placed_text() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, "Order placed")}`) }
 
     async tapOnStandardOptionButton(testid: string): Promise<void> {
         const reportingMessage = "Tap on Standard Button";
@@ -79,6 +83,50 @@ class CheckoutScreen extends Screen {
     async tapOnDoneButton(testid: string): Promise<void> {
         const reportingMessage = "Tap on Done Button";
         await executeWebAction(this.tapOnMobileElement, testid, reportingMessage, await this.checkout_done_button);
+        await this.explicitPause(constants.timers.short2);
+    }
+
+    async tapOnPayWithCashButton(testid: string): Promise<void> {
+        const reportingMessage = "Tap on Pay with cash Button";
+        await this.explicitPause(constants.timers.minimum1);
+        await executeWebAction(this.tapOnMobileElement, testid, reportingMessage, await this.checkout_pay_with_cash_button);
+    }
+
+    async tapOnCalculateChangeButton(testid: string): Promise<void> {
+        const reportingMessage = `Tap on Calculate Change button`;
+        await executeWebAction(this.tapOnMobileElement, testid, reportingMessage, await this.checkout_calculate_change_button);
+        await this.explicitPause(constants.timers.minimum1);
+    }
+
+    async tapOnDigitButton(testid: string, numberDigit: string): Promise<void> {
+        const reportingMessage = `Tap on ${numberDigit} Digit`;
+        await executeWebAction(this.tapOnMobileElement, testid, reportingMessage, await $(`~${numberDigit}`));
+        await this.explicitPause(constants.timers.minimum1);
+    }
+
+    async typeInCodeNumber(testid: string, number: string): Promise<void> {
+        const codeDigits = number.split('');
+        for (let i = 0; i < codeDigits.length; i++) {
+            await this.tapOnDigitButton(testid, codeDigits[i]);
+        }
+    }
+
+    async tapOnCompleteTransactionButton(testid: string): Promise<void> {
+        const reportingMessage = "Tap on Complete Transaction Button";
+        await this.explicitPause(constants.timers.minimum1);
+        await executeWebAction(this.tapOnMobileElement, testid, reportingMessage, await this.checkout_screen_complete_transaction_button);
+    }
+
+    async isOrderPlacedMessagePresent(testid: string): Promise<void> {
+        const reportingMessage = "Confirmation Message is Present";
+        try {
+            assert.exists(await this.checkout_order_placed_text, constants.errorMessages.chaiErrorMessage);
+            reporter.addStep(testid, 'info', reportingMessage);
+        } catch (error: any) {
+            error.message = `${reportingMessage} - ${error.message}`;
+            reporter.addStep(testid, 'error', reportingMessage);
+            throw error;
+        }
         await this.explicitPause(constants.timers.short2);
     }
 
