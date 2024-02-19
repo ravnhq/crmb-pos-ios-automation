@@ -25,6 +25,7 @@ class CheckoutScreen extends Screen {
     get checkout_calculate_change_button() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, "Calculate change due")}`) }
     get checkout_screen_complete_transaction_button() {return $(`${generateMobileLocator(ACCESSIBILITY_ID, "Complete transaction")}`)}
     get checkout_order_placed_text() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, "Order placed")}`) }
+    get checkout_enter_button() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, 'Enter')}`) }
 
     async tapOnStandardOptionButton(testid: string): Promise<void> {
         const reportingMessage = "Tap on Standard Button";
@@ -128,6 +129,12 @@ class CheckoutScreen extends Screen {
             throw error;
         }
         await this.explicitPause(constants.timers.short2);
+    }
+
+    async tapOnEnterButton(testid: string): Promise<void> {
+        const reportingMessage = `Tap on Calculate Change button`;
+        await executeWebAction(this.tapOnMobileElement, testid, reportingMessage, await this.checkout_enter_button);
+        await this.explicitPause(constants.timers.minimum1);
     }
 
 }
