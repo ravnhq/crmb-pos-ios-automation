@@ -12,6 +12,7 @@ class CheckoutScreen extends Screen {
     }
 
     get checkout_standard_button() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, 'Standard')}`) }
+    get checkout_schedule_for_later_button() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, 'Schedule for later')}`)}
     get checkout_charge_customer_button() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, 'Charge customer')}`) }
     get checkout_continue_button() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, 'Continue')}`) }
     get checkout_go_to_payment_button() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, 'Go to payment')}`) }
@@ -25,10 +26,23 @@ class CheckoutScreen extends Screen {
     get checkout_calculate_change_button() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, "Calculate change due")}`) }
     get checkout_screen_complete_transaction_button() {return $(`${generateMobileLocator(ACCESSIBILITY_ID, "Complete transaction")}`)}
     get checkout_order_placed_text() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, "Order placed")}`) }
+    get home_screen_curbside_button() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, 'Curbside')}`) }
+
+    async tapOnCurbsideButton(testid: string): Promise<void> {
+        const reportingMessage = "Tap on Curbside Button";
+        await executeWebAction(this.tapOnMobileElement, testid, reportingMessage, await this.home_screen_curbside_button);
+        await this.explicitPause(constants.timers.short1);
+    }
 
     async tapOnStandardOptionButton(testid: string): Promise<void> {
         const reportingMessage = "Tap on Standard Button";
         await executeWebAction(this.tapOnMobileElement, testid, reportingMessage, await this.checkout_standard_button);
+        await this.explicitPause(constants.timers.short2);
+    }
+
+    async tapOnScheduleForLaterOptionButton(testid: string): Promise<void> {
+        const reportingMessage = "Tap on Schedule for later Button";
+        await executeWebAction(this.tapOnMobileElement, testid, reportingMessage, await this.checkout_schedule_for_later_button);
         await this.explicitPause(constants.timers.short2);
     }
 
