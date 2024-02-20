@@ -2,7 +2,7 @@ import constants from '../../../data/constants.json' assert { type: "json" };
 import executeWebAction from "../../helper/error-handling.js";
 import generateMobileLocator from "../../helper/mobile-locator-generator.js";
 import reporter from '../../helper/reporter.js';
-import { ACCESSIBILITY_ID, PREDICATE_STRING } from "../../helper/selector-types.js";
+import { ACCESSIBILITY_ID, CLASS_CHAIN, PREDICATE_STRING } from "../../helper/selector-types.js";
 import Screen from "../Screen.js";
 import { assert } from 'chai';
 
@@ -25,6 +25,7 @@ class CheckoutScreen extends Screen {
     get checkout_calculate_change_button() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, "Calculate change due")}`) }
     get checkout_screen_complete_transaction_button() {return $(`${generateMobileLocator(ACCESSIBILITY_ID, "Complete transaction")}`)}
     get checkout_order_placed_text() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, "Order placed")}`) }
+    
 
     async tapOnStandardOptionButton(testid: string): Promise<void> {
         const reportingMessage = "Tap on Standard Button";

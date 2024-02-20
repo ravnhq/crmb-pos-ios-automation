@@ -16,6 +16,13 @@ class HomeScreen extends Screen {
     get home_screen_menu_item_first_result() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, 'Bud Light')}`)}
     get home_screen_checkout_button() { return $(`${generateMobileLocator(CLASS_CHAIN, '**/XCUIElementTypeButton[`name == "Checkout"`][2]')}`) }
     get home_screen_take_out_button() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, 'ToGo')}`) }
+    get checkout_cancel_order_button() { return $(`${generateMobileLocator(CLASS_CHAIN, '**/XCUIElementTypeButton[`name == "Cancel Order"`]')}`)}
+
+    async tapOnCancelOrderButton(testid: string): Promise<void>{
+        const reportingMessage = "Tap on Cancel Order Button";
+        await executeWebAction(this.tapOnMobileElement, testid, reportingMessage, await this.checkout_cancel_order_button);
+        await this.explicitPause(constants.timers.short2);
+    }
 
     async tapOnCurbsideButton(testid: string): Promise<void> {
         const reportingMessage = "Tap on Curbside Button";
