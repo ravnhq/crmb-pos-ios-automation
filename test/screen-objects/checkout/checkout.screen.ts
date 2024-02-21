@@ -33,6 +33,7 @@ class CheckoutScreen extends Screen {
         await executeWebAction(this.tapOnMobileElement, testid, reportingMessage, await this.home_screen_curbside_button);
         await this.explicitPause(constants.timers.short1);
     }
+    get checkout_enter_button() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, 'Enter')}`) }
 
     async tapOnStandardOptionButton(testid: string): Promise<void> {
         const reportingMessage = "Tap on Standard Button";
@@ -142,6 +143,12 @@ class CheckoutScreen extends Screen {
             throw error;
         }
         await this.explicitPause(constants.timers.short2);
+    }
+
+    async tapOnEnterButton(testid: string): Promise<void> {
+        const reportingMessage = `Tap on Calculate Change button`;
+        await executeWebAction(this.tapOnMobileElement, testid, reportingMessage, await this.checkout_enter_button);
+        await this.explicitPause(constants.timers.minimum1);
     }
 
 }
