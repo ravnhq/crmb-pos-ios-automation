@@ -32,6 +32,7 @@
         "testCVC":"034",
         "testZip":"01101",
         "deviceCode": "1111111111111",
-        "orderTotal": "102"
+        "orderTotal": "102",
+        "tableNumber": "2"
     }
 }
