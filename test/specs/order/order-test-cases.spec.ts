@@ -178,12 +178,28 @@ describe('CRMB-POS - Order Test Scenarios', () => {
         await checkoutScreen.tapOnDoneButton(testid);
     });
 
+
+
+
+
+
+
+
+
+
+
+    it('POS-014- Cancel Order', async () => {
+        await homeScreen.tapOnSearchBarButton(testid);
+        await homeScreen.typeOnSearchBarInput(testid, constants.testScriptConstants.searchItem);
+        await homeScreen.tapOnItemFirstResult(testid);
+        await menuItemDetailsScreen.tapOnAddToOrder(testid);
+        await homeScreen.tapOnCancelOrderButton(testid);
+    });
+
     afterEach(async () => {
         await nativeScreen.tapOnSettingsButton(testid);
         await settingsScreen.tapOnLogoutButton(testid);
         await nativeScreen.tapOnOkButton(testid);
     })
-
-    
 
 });

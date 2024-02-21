@@ -2,7 +2,7 @@ import constants from '../../../data/constants.json' assert { type: "json" };
 import executeWebAction from "../../helper/error-handling.js";
 import generateMobileLocator from "../../helper/mobile-locator-generator.js";
 import reporter from '../../helper/reporter.js';
-import { ACCESSIBILITY_ID, PREDICATE_STRING } from "../../helper/selector-types.js";
+import { ACCESSIBILITY_ID, CLASS_CHAIN, PREDICATE_STRING } from "../../helper/selector-types.js";
 import Screen from "../Screen.js";
 import { assert } from 'chai';
 
