@@ -16,6 +16,8 @@ class HomeScreen extends Screen {
     get home_screen_menu_item_first_result() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, 'Bud Light')}`)}
     get home_screen_checkout_button() { return $(`${generateMobileLocator(CLASS_CHAIN, '**/XCUIElementTypeButton[`name == "Checkout"`][2]')}`) }
     get home_screen_take_out_button() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, 'ToGo')}`) }
+    get home_screen_drive_thru_button() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, 'Drive-thru')}`) }
+
 
     async tapOnCurbsideButton(testid: string): Promise<void> {
         const reportingMessage = "Tap on Curbside Button";
@@ -49,6 +51,12 @@ class HomeScreen extends Screen {
     async tapOnToGoText(testid: string): Promise<void> {
         const reportingMessage = "Tap on To Go Text";
         await executeWebAction(this.tapOnMobileElement, testid, reportingMessage, await this.home_screen_take_out_button);
+        await this.explicitPause(constants.timers.short1);
+    }
+
+    async tapOnDriveThruText(testid: string): Promise<void> {
+        const reportingMessage = "Tap on Drive Thru Text";
+        await executeWebAction(this.tapOnMobileElement, testid, reportingMessage, await this.home_screen_drive_thru_button);
         await this.explicitPause(constants.timers.short1);
     }
 }
