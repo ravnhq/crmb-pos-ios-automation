@@ -57,6 +57,26 @@ describe('CRMB-POS - Order Test Scenarios', () => {
         await checkoutScreen.tapOnDoneButton(testid);
     });
 
+    it('POS-004 Create Order / Dine In / CC payment', async () => {
+        await nativeScreen.isAllowWhileAppButtonPresent(testid);
+        await homeScreen.tapOnDineInText(testid);
+        await homeScreen.tapOnSearchBarButton(testid);
+        await homeScreen.typeOnSearchBarInput(testid, constants.testScriptConstants.searchItem);
+        await homeScreen.tapOnItemFirstResult(testid);
+        await menuItemDetailsScreen.tapOnAddToOrder(testid);
+        await homeScreen.tapOnCheckoutButton(testid);
+        await checkoutScreen.tapOnChargeCustomerButton(testid);
+        await checkoutScreen.typeInCodeNumber(testid, constants.testScriptConstants.tableNumber);
+        await checkoutScreen.tapOnEnterButton(testid);
+        await checkoutScreen.tapOnGoToPaymentButton(testid);
+        await checkoutScreen.typeOnCardNumberInput(testid, constants.testScriptConstants.testCardNumber);
+        await checkoutScreen.typeOnExpirationDateInput(testid, constants.testScriptConstants.testExpirationDate);
+        await checkoutScreen.typeOnCVCInput(testid, constants.testScriptConstants.testCVC);
+        await checkoutScreen.typeOnZIPInput(testid, constants.testScriptConstants.testZip);
+        await checkoutScreen.tapOnPayButton(testid);
+        await checkoutScreen.tapOnDoneButton(testid);
+    });
+
     it('POS-010- Create Order / Curbside / CC payment', async () => {
         await homeScreen.tapOnCurbsideButton(testid);
         await homeScreen.tapOnSearchBarButton(testid);
