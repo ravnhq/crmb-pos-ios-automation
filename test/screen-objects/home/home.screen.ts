@@ -46,7 +46,7 @@ class HomeScreen extends Screen {
     async tapOnCheckoutButton(testid: string): Promise<void> {
         const reportingMessage = "Tap on Check out Button";
         await executeWebAction(this.tapOnMobileElement, testid, reportingMessage, await this.home_screen_checkout_button);
-        await this.explicitPause(constants.timers.short2);
+        await this.explicitPause(constants.timers.short3);
     }
 
     async tapOnToGoText(testid: string): Promise<void> {
