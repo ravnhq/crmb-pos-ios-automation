@@ -178,7 +178,7 @@ describe('CRMB-POS - Order Test Scenarios', () => {
         await checkoutScreen.tapOnDoneButton(testid);
     });
 
-    it('POS-014- Cancel Order', async () => {
+    it('POS-014 - Cancel Order', async () => {
         await homeScreen.tapOnSearchBarButton(testid);
         await homeScreen.typeOnSearchBarInput(testid, constants.testScriptConstants.searchItem);
         await homeScreen.tapOnItemFirstResult(testid);
@@ -201,6 +201,22 @@ describe('CRMB-POS - Order Test Scenarios', () => {
         await checkoutScreen.typeInCodeNumber(testid, constants.testScriptConstants.employeeCode);
         await checkoutScreen.tapOnContinueButton(testid);
         await checkoutScreen.typeInCodeNumber(testid, constants.testScriptConstants.orderTotalPlusCustomItem);
+        await checkoutScreen.tapOnCompleteTransactionButton(testid);
+        await checkoutScreen.isOrderPlacedMessagePresent(testid);
+        await checkoutScreen.tapOnDoneButton(testid);
+    });
+  
+      it('POS-016 - Use a discount in order', async () =>{
+        await homeScreen.tapOnSearchBarButton(testid);
+        await homeScreen.typeOnSearchBarInput(testid, constants.testScriptConstants.searchItem);
+        await homeScreen.tapOnItemFirstResult(testid);
+        await menuItemDetailsScreen.tapOnAddToOrder(testid);
+        await homeScreen.tapOnCheckoutButton(testid);
+        await checkoutScreen.tapOnCurbsideButton(testid);
+        await checkoutScreen.tapOnStandardOptionButton(testid);
+        await checkoutScreen.typeOnDiscountInput(testid, constants.testScriptConstants.discountCode);
+        await checkoutScreen.tapOnApplyDiscountButton(testid);\        
+        await checkoutScreen.typeInCodeNumber(testid, constants.testScriptConstants.orderTotalWithDiscount);
         await checkoutScreen.tapOnCompleteTransactionButton(testid);
         await checkoutScreen.isOrderPlacedMessagePresent(testid);
         await checkoutScreen.tapOnDoneButton(testid);
