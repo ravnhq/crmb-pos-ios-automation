@@ -33,6 +33,7 @@
         "testZip":"01101",
         "deviceCode": "1111111111111",
         "orderTotal": "102",
-        "tableNumber": "2"
+        "tableNumber": "2",
+        "additionalItem": "coke"
     }
 }

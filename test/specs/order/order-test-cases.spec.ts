@@ -196,6 +196,51 @@ describe('CRMB-POS - Order Test Scenarios', () => {
         await homeScreen.tapOnCancelOrderButton(testid);
     });
 
+    it('POS-017 - Add more items from checkout screen', async () => {
+        await homeScreen.tapOnSearchBarButton(testid);
+        await homeScreen.typeOnSearchBarInput(testid, constants.testScriptConstants.searchItem);
+        await homeScreen.tapOnItemFirstResult(testid);
+        await menuItemDetailsScreen.tapOnAddToOrder(testid);
+        await homeScreen.tapOnCheckoutButton(testid);
+        await checkoutScreen.tapOnAddItemButton(testid);
+        await checkoutScreen.tapOnAddMoreItemsButton(testid);
+        await homeScreen.tapOnSearchBarButton(testid);
+        await homeScreen.tapOnClearSearchButton(testid);
+        await homeScreen.typeOnSearchBarInput(testid, constants.testScriptConstants.additionalItem);
+        await homeScreen.tapOnItemFirstResult(testid);
+        await menuItemDetailsScreen.tapOnAddToOrder(testid);
+        await homeScreen.tapOnCheckoutButton(testid);
+        await checkoutScreen.tapOnChargeCustomerButton(testid);
+        await checkoutScreen.tapOnContinueButton(testid);
+        await checkoutScreen.tapOnGoToPaymentButton(testid);
+        await checkoutScreen.typeOnCardNumberInput(testid, constants.testScriptConstants.testCardNumber);
+        await checkoutScreen.typeOnExpirationDateInput(testid, constants.testScriptConstants.testExpirationDate);
+        await checkoutScreen.typeOnCVCInput(testid, constants.testScriptConstants.testCVC);
+        await checkoutScreen.typeOnZIPInput(testid, constants.testScriptConstants.testZip);
+        await checkoutScreen.tapOnPayButton(testid);
+        await checkoutScreen.tapOnDoneButton(testid);
+    });
+
+    it('POS-018 - Change order type from checkout screen', async () => {
+        await homeScreen.tapOnSearchBarButton(testid);
+        await homeScreen.typeOnSearchBarInput(testid, constants.testScriptConstants.searchItem);
+        await homeScreen.tapOnItemFirstResult(testid);
+        await menuItemDetailsScreen.tapOnAddToOrder(testid);
+        await homeScreen.tapOnCheckoutButton(testid);
+        await homeScreen.tapOnDineInText(testid);
+        await checkoutScreen.tapOnChargeCustomerButton(testid);
+        await checkoutScreen.typeInCodeNumber(testid, constants.testScriptConstants.tableNumber);
+        await checkoutScreen.tapOnEnterButton(testid);
+        await checkoutScreen.tapOnPayWithCashButton(testid);
+        await checkoutScreen.tapOnCalculateChangeButton(testid);
+        await checkoutScreen.typeInCodeNumber(testid, constants.testScriptConstants.employeeCode);
+        await checkoutScreen.tapOnContinueButton(testid);
+        await checkoutScreen.typeInCodeNumber(testid, constants.testScriptConstants.orderTotal);
+        await checkoutScreen.tapOnCompleteTransactionButton(testid);
+        await checkoutScreen.isOrderPlacedMessagePresent(testid);
+        await checkoutScreen.tapOnDoneButton(testid);
+    });
+
     afterEach(async () => {
         await nativeScreen.tapOnSettingsButton(testid);
         await settingsScreen.tapOnLogoutButton(testid);
