@@ -1,4 +1,11 @@
 {
+    "numbers": {
+        "zero": 0,
+        "one": 1,
+        "two": 2,
+        "three": 3,
+        "four": 4
+    },
     "timers": {
         "minimum1": 500,
         "minimum2": 1000,
@@ -20,6 +27,9 @@
         "chaiErrorMessage": "Could not locate the element, assertion failed"
     },
     "testScriptConstants":{
+        "discountCode": "AUTOMATICS",
+        "customItemPrice": "100",
+        "customItemName": "Chips",
         "employeePhoneNumber":"5037759361",
         "employeeCode": "495427",
         "customerPhoneNumber":"2027336837",
@@ -33,6 +43,10 @@
         "testZip":"01101",
         "deviceCode": "1111111111111",
         "orderTotal": "102",
+        "tableNumber": "2",
+        "additionalItem": "coke"
+        "orderTotalWithDiscount": "0.50",
+        "orderTotalPlusCustomItem": "202",
         "tableNumber": "2"
     }
 }
