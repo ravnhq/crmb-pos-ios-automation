@@ -29,13 +29,28 @@ class CheckoutScreen extends Screen {
     get home_screen_curbside_button() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, 'Curbside')}`) }
     get checkout_add_item_button() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, "add-line")}`) }
     get checkout_more_items_button() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, "Add More Items")}`) }
+    get checkout_curbside_button() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, 'Curbside')}`) }
+    get checkout_apply_button() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, 'Apply')}`) }
+    get checkout_discount_input() { return $('-ios class chain:**/XCUIElementTypeTextField[`value == "X0X0X0"`]')}
+    get checkout_enter_button() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, 'Enter')}`) }
+
+    async typeOnDiscountInput(testid: string, discountCode: string): Promise<void> {
+        const reportingMessage = `${discountCode} set as discount code`
+        await executeWebAction(this.typeOnMobileElement, testid, reportingMessage, await this.checkout_discount_input, discountCode);
+        await this.explicitPause(constants.timers.short2);
+    }
+
+    async tapOnApplyDiscountButton(testid: string): Promise<void> {
+        const reportingMessage = "Tap on Apply Discount Button";
+        await executeWebAction(this.tapOnMobileElement, testid, reportingMessage, await this.checkout_apply_button);
+        await this.explicitPause(constants.timers.short2);
+    }
 
     async tapOnCurbsideButton(testid: string): Promise<void> {
         const reportingMessage = "Tap on Curbside Button";
-        await executeWebAction(this.tapOnMobileElement, testid, reportingMessage, await this.home_screen_curbside_button);
-        await this.explicitPause(constants.timers.short1);
+        await executeWebAction(this.tapOnMobileElement, testid, reportingMessage, await this.checkout_curbside_button);
+        await this.explicitPause(constants.timers.short2);
     }
-    get checkout_enter_button() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, 'Enter')}`) }
 
     async tapOnStandardOptionButton(testid: string): Promise<void> {
         const reportingMessage = "Tap on Standard Button";
