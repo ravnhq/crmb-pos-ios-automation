@@ -1,4 +1,11 @@
 {
+    "numbers": {
+        "zero": 0,
+        "one": 1,
+        "two": 2,
+        "three": 3,
+        "four": 4
+    },
     "timers": {
         "minimum1": 500,
         "minimum2": 1000,
@@ -21,6 +28,8 @@
     },
     "testScriptConstants":{
         "discountCode": "AUTOMATICS",
+        "customItemPrice": "100",
+        "customItemName": "Chips",
         "employeePhoneNumber":"5037759361",
         "employeeCode": "495427",
         "customerPhoneNumber":"2027336837",
@@ -35,6 +44,7 @@
         "deviceCode": "1111111111111",
         "orderTotal": "102",
         "orderTotalWithDiscount": "0.50",
+        "orderTotalPlusCustomItem": "202",
         "tableNumber": "2"
     }
 }
