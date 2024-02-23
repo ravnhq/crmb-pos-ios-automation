@@ -94,6 +94,25 @@ describe('CRMB-POS - Order Test Scenarios', () => {
         await checkoutScreen.tapOnDoneButton(testid);
     });
 
+    it('POS-007 Create Order / Drive Thru / Cash Payment', async () => {
+        await homeScreen.tapOnSearchBarButton(testid);
+        await homeScreen.typeOnSearchBarInput(testid, constants.testScriptConstants.searchItem);
+        await homeScreen.tapOnItemFirstResult(testid);
+        await menuItemDetailsScreen.tapOnAddToOrder(testid);
+        await homeScreen.tapOnCheckoutButton(testid);
+        await homeScreen.tapOnDriveThruText(testid);
+        await checkoutScreen.tapOnChargeCustomerButton(testid);
+        await checkoutScreen.tapOnContinueButton(testid);
+        await checkoutScreen.tapOnPayWithCashButton(testid);
+        await checkoutScreen.tapOnCalculateChangeButton(testid);
+        await checkoutScreen.typeInCodeNumber(testid, constants.testScriptConstants.employeeCode);
+        await checkoutScreen.tapOnContinueButton(testid);
+        await checkoutScreen.typeInCodeNumber(testid, constants.testScriptConstants.orderTotal);
+        await checkoutScreen.tapOnCompleteTransactionButton(testid);
+        await checkoutScreen.isOrderPlacedMessagePresent(testid);
+        await checkoutScreen.tapOnDoneButton(testid);
+    });
+
     afterEach(async () => {
         await nativeScreen.tapOnSettingsButton(testid);
         await settingsScreen.tapOnLogoutButton(testid);
