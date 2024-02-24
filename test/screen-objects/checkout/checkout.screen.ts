@@ -33,6 +33,9 @@ class CheckoutScreen extends Screen {
     get checkout_apply_button() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, 'Apply')}`) }
     get checkout_discount_input() { return $('-ios class chain:**/XCUIElementTypeTextField[`value == "X0X0X0"`]')}
     get checkout_enter_button() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, 'Enter')}`) }
+    get home_screen_take_out_button() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, 'ToGo')}`) }
+    get home_screen_drive_thru_button() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, 'Drive-thru')}`) }
+    get home_screen_dine_in_button() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, 'Dine In')}`) }
 
     async typeOnDiscountInput(testid: string, discountCode: string): Promise<void> {
         const reportingMessage = `${discountCode} set as discount code`
@@ -178,6 +181,23 @@ class CheckoutScreen extends Screen {
         const reportingMessage = `Tap on More items button`;
         await executeWebAction(this.tapOnMobileElement, testid, reportingMessage, await this.checkout_more_items_button);
         await this.explicitPause(constants.timers.minimum1);
+    }
+
+    async tapOnToGoText(testid: string): Promise<void> {
+        const reportingMessage = "Tap on To Go Text";
+        await executeWebAction(this.tapOnMobileElement, testid, reportingMessage, await this.home_screen_take_out_button);
+        await this.explicitPause(constants.timers.short1);
+    }
+
+    async tapOnDriveThruText(testid: string): Promise<void> {
+        const reportingMessage = "Tap on Drive Thru Text";
+        await executeWebAction(this.tapOnMobileElement, testid, reportingMessage, await this.home_screen_drive_thru_button);
+        await this.explicitPause(constants.timers.short1);
+    }
+    async tapOnDineInText(testid: string): Promise<void> {
+        const reportingMessage = "Tap on Dine In Text";
+        await executeWebAction(this.tapOnMobileElement, testid, reportingMessage, await this.home_screen_dine_in_button);
+        await this.explicitPause(constants.timers.short1);
     }
     
 }

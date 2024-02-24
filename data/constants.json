@@ -44,9 +44,9 @@
         "deviceCode": "1111111111111",
         "orderTotal": "102",
         "tableNumber": "2",
-        "additionalItem": "coke"
+        "additionalItem": "coke",
         "orderTotalWithDiscount": "0.50",
         "orderTotalPlusCustomItem": "202",
-        "tableNumber": "2"
+        "orderTotalWithAdditionalItems": "257"
     }
 }
