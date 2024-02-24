@@ -10,20 +10,11 @@ class HomeScreen extends Screen {
     constructor() {
         super();
     }
-
-
     
     get home_screen_search_button() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, 'Search')}`)}
-    get home_screen_menu_item_first_result() { return $(`${generateMobileLocator(CLASS_CHAIN, '**/XCUIElementTypeWindow[1]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeScrollView/XCUIElementTypeOther/XCUIElementTypeOther')}`)}
-
-    get home_screen_search_button() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, 'Search')}`) }
-    get home_screen_menu_item_first_result() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, 'Bud Light')}`) }
+    get home_screen_menu_item_first_result() { return $(`${generateMobileLocator(CLASS_CHAIN, '**/XCUIElementTypeScrollView/XCUIElementTypeOther/XCUIElementTypeOther')}`)}
     get home_screen_checkout_button() { return $(`${generateMobileLocator(CLASS_CHAIN, '**/XCUIElementTypeButton[`name == "Checkout"`][2]')}`) }
-    get home_screen_take_out_button() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, 'ToGo')}`) }
     get home_screen_cancel_order_button() { return $(`${generateMobileLocator(CLASS_CHAIN, '**/XCUIElementTypeButton[`name == "Cancel Order"`]')}`) }
-    get home_screen_drive_thru_button() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, 'Drive-thru')}`) }
-    get home_screen_dine_in_button() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, 'Dine In')}`) }
-
     get home_screen_clear_search_button() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, 'Clear text')}`) }
     get home_screen_add_custom_item_option() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, 'plus-vector')}`) }
     get home_screen_name_custom_item() { return $('-ios class chain:**/XCUIElementTypeTextField[`value == "Custom Item"`]') }
@@ -84,22 +75,7 @@ class HomeScreen extends Screen {
         await this.explicitPause(constants.timers.short3);
     }
 
-    async tapOnToGoText(testid: string): Promise<void> {
-        const reportingMessage = "Tap on To Go Text";
-        await executeWebAction(this.tapOnMobileElement, testid, reportingMessage, await this.home_screen_take_out_button);
-        await this.explicitPause(constants.timers.short1);
-    }
-
-    async tapOnDriveThruText(testid: string): Promise<void> {
-        const reportingMessage = "Tap on Drive Thru Text";
-        await executeWebAction(this.tapOnMobileElement, testid, reportingMessage, await this.home_screen_drive_thru_button);
-        await this.explicitPause(constants.timers.short1);
-    }
-    async tapOnDineInText(testid: string): Promise<void> {
-        const reportingMessage = "Tap on Dine In Text";
-        await executeWebAction(this.tapOnMobileElement, testid, reportingMessage, await this.home_screen_dine_in_button);
-        await this.explicitPause(constants.timers.short1);
-    }
+    
     async tapOnClearSearchButton(testid: string): Promise<void> {
         const reportingMessage = "Tap on Clear search button";
         await executeWebAction(this.tapOnMobileElement, testid, reportingMessage, await this.home_screen_clear_search_button);
