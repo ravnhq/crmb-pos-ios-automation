@@ -290,6 +290,20 @@ describe('CRMB-POS - Order Test Scenarios', () => {
         await checkoutScreen.isOrderPlacedMessagePresent(testid);
         await checkoutScreen.tapOnDoneButton(testid);
     });
+
+    it('POS-020 - Close checkout modal(tips/table)', async () => {
+        await homeScreen.tapOnSearchBarButton(testid);
+        await homeScreen.typeOnSearchBarInput(testid, constants.testScriptConstants.searchItem);
+        await homeScreen.tapOnItemFirstResult(testid);
+        await menuItemDetailsScreen.tapOnAddToOrder(testid);
+        await homeScreen.tapOnCheckoutButton(testid);
+        await checkoutScreen.tapOnChargeCustomerButton(testid);
+        await checkoutScreen.tapOnCloseButton(testid);
+        await checkoutScreen.tapOnDineInText(testid);
+        await checkoutScreen.tapOnChargeCustomerButton(testid);
+        await checkoutScreen.tapOnCloseButton(testid);
+        await checkoutScreen.tapOnBackButton();
+    });
   
     afterEach(async () => {
         await nativeScreen.tapOnSettingsButton(testid);
