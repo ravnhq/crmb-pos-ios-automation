@@ -14,7 +14,7 @@ class NativeScreen extends Screen {
     get native_screen_allow_while_using_app_button() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, 'Allow While Using App')}`) }
     get native_allow_allow_once_button() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, 'Allow Once')}`) }
     get native_allow_button() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, 'Allow')}`) }
-
+    get native_delete_order_button() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, 'Delete Order')}`) }
 
     async isAllowWhileAppButtonPresent(testid: string): Promise<void> {
         if (await (await this.native_screen_allow_while_using_app_button).isDisplayed()) {
@@ -42,6 +42,11 @@ class NativeScreen extends Screen {
     async tapOnOkButton(testid: string): Promise<void> {
         const reportingMessage = "Tap on Ok Button";
         await executeWebAction(this.tapOnMobileElement, testid, reportingMessage, await this.native_ok_button);
+    }
+
+    async tapOnDeleteOrderButton(testid: string): Promise<void> {
+        const reportingMessage = "Tap on Delete Order Button";
+        await executeWebAction(this.tapOnMobileElement, testid, reportingMessage, await this.native_delete_order_button);
     }
 }
 
