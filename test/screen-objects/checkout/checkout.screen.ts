@@ -37,6 +37,10 @@ class CheckoutScreen extends Screen {
     get checkout_drive_thru_button() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, 'Drive-thru')}`) }
     get checkout_dine_in_button() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, 'Dine In')}`) }
     get checkout_close_button() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, 'Close')}`) }
+    get checkout_customer_lookup_button() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, 'Customer lookup')}`) }
+    get checkout_customer_lookup_inputs() { return $$('-ios class chain:**/XCUIElementTypeTextField') }
+    get checkout_confirm_customer_button() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, 'Confirm customer')}`) }
+    get checkout_phone_number_lbl() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, '+1 (234)-747-4777')}`) }
 
     async typeOnDiscountInput(testid: string, discountCode: string): Promise<void> {
         const reportingMessage = `${discountCode} set as discount code`
@@ -205,6 +209,37 @@ class CheckoutScreen extends Screen {
         const reportingMessage = "Tap on Close Button";
         await executeWebAction(this.tapOnMobileElement, testid, reportingMessage, await this.checkout_close_button);
         await this.explicitPause(constants.timers.short1);
+    }
+
+    async tapOnCustomerLookupButton(testid: string): Promise<void> {
+        const reportingMessage = "Tap on Customer Lookup Button";
+        await executeWebAction(this.tapOnMobileElement, testid, reportingMessage, await this.checkout_customer_lookup_button);
+        await this.explicitPause(constants.timers.short3);
+    }
+
+   async typeIntoLookupFormModalInputs(testid:string,index:number,inputText:string):Promise<void>{
+        const reportingMessage = "Type in Customer Lookup Fields";
+        const inputFields = await this.checkout_customer_lookup_inputs;
+        await executeWebAction(this.typeOnMobileElement,testid,reportingMessage, inputFields[index],inputText);
+    }
+
+    async tapOnConfirmCustomerButton(testid: string): Promise<void> {
+        const reportingMessage = "Tap on Confirm customer Button";
+        await executeWebAction(this.tapOnMobileElement, testid, reportingMessage, await this.checkout_confirm_customer_button);
+        await this.explicitPause(constants.timers.short1);
+    }
+
+    async isCustomerInfoDisplayed(testid: string){
+        const reportingMessage = "Customer Phone Number is Present";
+        try {
+            assert.exists(await this.checkout_phone_number_lbl, constants.errorMessages.chaiErrorMessage);
+            reporter.addStep(testid, 'info', reportingMessage);
+        } catch (error: any) {
+            error.message = `${reportingMessage} - ${error.message}`;
+            reporter.addStep(testid, 'error', reportingMessage);
+            throw error;
+        }
+        await this.explicitPause(constants.timers.short2);
     }
   
 }
