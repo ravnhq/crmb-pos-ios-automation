@@ -291,6 +291,30 @@ describe('CRMB-POS - Order Test Scenarios', () => {
         await checkoutScreen.tapOnDoneButton(testid);
     });
 
+    it('POS-019 - Change owner order in checkout screen', async () => {
+        await homeScreen.tapOnSearchBarButton(testid);
+        await homeScreen.typeOnSearchBarInput(testid, constants.testScriptConstants.searchItem);
+        await homeScreen.tapOnItemFirstResult(testid);
+        await menuItemDetailsScreen.tapOnAddToOrder(testid);
+        await homeScreen.tapOnCheckoutButton(testid);
+        await checkoutScreen.tapOnCustomerLookupButton(testid);
+        await checkoutScreen.typeIntoLookupFormModalInputs(testid,2,constants.testScriptConstants.customerPhoneNumber);
+        await checkoutScreen.typeIntoLookupFormModalInputs(testid,3,constants.testScriptConstants.userFirstName);
+        await checkoutScreen.typeIntoLookupFormModalInputs(testid,4,constants.testScriptConstants.userLastName);
+        await checkoutScreen.tapOnConfirmCustomerButton(testid);
+        await checkoutScreen.isCustomerInfoDisplayed(testid);
+        await checkoutScreen.tapOnChargeCustomerButton(testid);
+        await checkoutScreen.tapOnContinueButton(testid);
+        await checkoutScreen.tapOnPayWithCashButton(testid);
+        await checkoutScreen.tapOnCalculateChangeButton(testid);
+        await checkoutScreen.typeInCodeNumber(testid, constants.testScriptConstants.employeeCode);
+        await checkoutScreen.tapOnContinueButton(testid);
+        await checkoutScreen.typeInCodeNumber(testid, constants.testScriptConstants.orderTotal);
+        await checkoutScreen.tapOnCompleteTransactionButton(testid);
+        await checkoutScreen.isOrderPlacedMessagePresent(testid);
+        await checkoutScreen.tapOnDoneButton(testid);
+    });
+
     it('POS-020 - Close checkout modal(tips/table)', async () => {
         await homeScreen.tapOnSearchBarButton(testid);
         await homeScreen.typeOnSearchBarInput(testid, constants.testScriptConstants.searchItem);
