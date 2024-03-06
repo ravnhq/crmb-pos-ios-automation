@@ -5,6 +5,7 @@ import settingsScreen from "../../screen-objects/settings/settings.screen.js";
 import homeScreen from "../../screen-objects/home/home.screen.js";
 import menuItemDetailsScreen from "../../screen-objects/home/menu-item-details.screen.js";
 import checkoutScreen from "../../screen-objects/checkout/checkout.screen.js";
+import ordersScreen from "../../screen-objects/orders/orders.screen.js";
 
 
 const testid = "CRMB"
@@ -171,6 +172,25 @@ describe('CRMB-POS - Order Test Scenarios', () => {
         await checkoutScreen.tapOnDoneButton(testid);
     });
 
+    it('POS-012 - Create Order / Fire Order', async () => {
+        await homeScreen.tapOnSearchBarButton(testid);
+        await homeScreen.typeOnSearchBarInput(testid, constants.testScriptConstants.searchItem);
+        await homeScreen.tapOnItemFirstResult(testid);
+        await menuItemDetailsScreen.tapOnAddToOrder(testid);
+        await homeScreen.tapOnCheckoutButton(testid);
+        await checkoutScreen.tapOnFireOrderButton(testid);
+        await nativeScreen.tapOnOrdersButton(testid);
+        await ordersScreen.tapOnOpenOrder(testid,0);
+        await ordersScreen.tapOnFinishOrderButton(testid);
+        await checkoutScreen.tapOnPayWithCashButton(testid);
+        await checkoutScreen.tapOnCalculateChangeButton(testid);
+        await checkoutScreen.typeInCodeNumber(testid, constants.testScriptConstants.employeeCode);
+        await checkoutScreen.tapOnContinueButton(testid);
+        await checkoutScreen.typeInCodeNumber(testid, constants.testScriptConstants.orderTotal);
+        await checkoutScreen.tapOnCompleteTransactionButton(testid);
+        await checkoutScreen.isOrderPlacedMessagePresent(testid);
+        await checkoutScreen.tapOnDoneButton(testid);
+    });
 
     it('POS-013- Create Order / Scheduled', async () => {
         await homeScreen.tapOnSearchBarButton(testid);

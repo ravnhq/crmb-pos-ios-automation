@@ -3,6 +3,8 @@ import Screen from "../Screen.js";
 import generateMobileLocator from "../../helper/mobile-locator-generator.js";
 import { ACCESSIBILITY_ID, CLASS_CHAIN } from "../../helper/selector-types.js";
 import { $ } from '@wdio/globals';
+import constants from '../../../data/constants.json' assert { type: "json" };
+
 
 class NativeScreen extends Screen {
     constructor() {
@@ -15,6 +17,7 @@ class NativeScreen extends Screen {
     get native_allow_allow_once_button() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, 'Allow Once')}`) }
     get native_allow_button() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, 'Allow')}`) }
     get native_delete_order_button() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, 'Delete Order')}`) }
+    get native_orders_button() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, 'Orders')}`) }
 
     async isAllowWhileAppButtonPresent(testid: string): Promise<void> {
         if (await (await this.native_screen_allow_while_using_app_button).isDisplayed()) {
@@ -47,6 +50,12 @@ class NativeScreen extends Screen {
     async tapOnDeleteOrderButton(testid: string): Promise<void> {
         const reportingMessage = "Tap on Delete Order Button";
         await executeWebAction(this.tapOnMobileElement, testid, reportingMessage, await this.native_delete_order_button);
+    }
+
+    async tapOnOrdersButton(testid: string): Promise<void> {
+        const reportingMessage = "Tap on Orders Button"
+        await executeWebAction(this.tapOnMobileElement, testid, reportingMessage, await this.native_orders_button);
+        await this.explicitPause(constants.timers.short3);
     }
 }
 
