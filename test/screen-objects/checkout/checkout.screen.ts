@@ -41,6 +41,7 @@ class CheckoutScreen extends Screen {
     get checkout_customer_lookup_inputs() { return $$('-ios class chain:**/XCUIElementTypeTextField') }
     get checkout_confirm_customer_button() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, 'Confirm customer')}`) }
     get checkout_phone_number_lbl() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, '+1 (234)-747-4777')}`) }
+    get checkout_fire_order_button() { return $(`${generateMobileLocator(ACCESSIBILITY_ID, 'Fire Order')}`) }
 
     async typeOnDiscountInput(testid: string, discountCode: string): Promise<void> {
         const reportingMessage = `${discountCode} set as discount code`
@@ -240,6 +241,12 @@ class CheckoutScreen extends Screen {
             throw error;
         }
         await this.explicitPause(constants.timers.short2);
+    }
+
+    async tapOnFireOrderButton(testid: string): Promise<void> {
+        const reportingMessage = "Tap on Fire Order Button";
+        await executeWebAction(this.tapOnMobileElement, testid, reportingMessage, await this.checkout_fire_order_button);
+        await this.explicitPause(constants.timers.short1);
     }
   
 }
