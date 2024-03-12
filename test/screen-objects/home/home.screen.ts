@@ -20,6 +20,7 @@ class HomeScreen extends Screen {
     get home_screen_name_custom_item() { return $('-ios class chain:**/XCUIElementTypeTextField[`value == "Custom Item"`]') }
     get home_screen_price_custom_item() { return $$('-ios class chain:**/XCUIElementTypeTextField') }
     get home_screen_add_custom_item_button() { return $('-ios class chain:**/XCUIElementTypeButton[`name == "Add custom item"`]') }
+    get home_screen_order_checkout_button() { return $(`${generateMobileLocator(CLASS_CHAIN, '**/XCUIElementTypeButton[`name == "Checkout"`][1]')}`) }
 
     async typeOnPriceCustomItemInput(testid: string, index: number, itemPrice: string): Promise<void> {
         const reportingMessage = `${itemPrice} set as custom item price`;
@@ -82,6 +83,11 @@ class HomeScreen extends Screen {
         await this.explicitPause(constants.timers.short1);
     }
     
+    async tapOnOrderCheckoutButton(testid: string): Promise<void> {
+        const reportingMessage = "Tap on Check out Button";
+        await executeWebAction(this.tapOnMobileElement, testid, reportingMessage, await this.home_screen_order_checkout_button);
+        await this.explicitPause(constants.timers.short3);
+    }
 
 }
 

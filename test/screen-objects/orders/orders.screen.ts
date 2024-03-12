@@ -3,6 +3,7 @@ import Screen from "../Screen.js";
 import generateMobileLocator from "../../helper/mobile-locator-generator.js";
 import { ACCESSIBILITY_ID, CLASS_CHAIN } from "../../helper/selector-types.js";
 import { $ } from '@wdio/globals';
+import constants from '../../../data/constants.json' assert { type: "json" };
 
 
 class OrdersScreen extends Screen {
@@ -15,6 +16,7 @@ class OrdersScreen extends Screen {
     get orders_screen_on_hold_button(){return $(`${generateMobileLocator(ACCESSIBILITY_ID,'On Hold')}`)}
     get orders_screen_open_order(){return $$(`${generateMobileLocator(CLASS_CHAIN,'**/XCUIElementTypeCell/XCUIElementTypeOther')}`)}  
     get orders_screen_finish_order_button(){return $(`${generateMobileLocator(ACCESSIBILITY_ID,'Finish Order')}`)} 
+    get orders_screen_edit_order_button(){return $(`${generateMobileLocator(ACCESSIBILITY_ID,'Edit Order')}`)} 
 
     async tapOnOpenButton(testid: string): Promise<void> {
         const reportingMessage = "Tap on Open Button";
@@ -26,7 +28,7 @@ class OrdersScreen extends Screen {
         await executeWebAction(this.tapOnMobileElement, testid, reportingMessage, await this.orders_screen_close_button);
     }
 
-    async tapOnOrdersButton(testid: string): Promise<void> {
+    async tapOnHoldOrdersButton(testid: string): Promise<void> {
         const reportingMessage = "Tap on 'On Hold' Button";
         await executeWebAction(this.tapOnMobileElement, testid, reportingMessage, await this.orders_screen_on_hold_button);
     }
@@ -40,6 +42,12 @@ class OrdersScreen extends Screen {
     async tapOnFinishOrderButton(testid: string): Promise<void> {
         const reportingMessage = "Tap on finish order button";
         await executeWebAction(this.tapOnMobileElement, testid, reportingMessage, await this.orders_screen_finish_order_button);
+    }
+
+    async tapOnEditOrderButton(testid: string): Promise<void> {
+        const reportingMessage = "Tap on Edit order button";
+        await executeWebAction(this.tapOnMobileElement, testid, reportingMessage, await this.orders_screen_edit_order_button);
+        await this.explicitPause(constants.timers.short3);
     }
 
 }
